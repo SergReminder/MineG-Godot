@@ -1,0 +1,220 @@
+[gd_scene load_steps=12 format=3 uid="uid://bk1st1x3qvplj"]
+
+[ext_resource type="Shape3D" uid="uid://umj0soelpx61" path="res://new_capsule_shape_3d.tres" id="2_3l1bs"]
+[ext_resource type="Script" path="res://RigidBody3D.gd" id="2_hpgn8"]
+[ext_resource type="CapsuleMesh" uid="uid://wfuq22c6sbh8" path="res://new_capsule_mesh.tres" id="3_s44ev"]
+[ext_resource type="Texture2D" uid="uid://dj42lvvtragev" path="res://clibs/sensor gamepad/GamepadButton.png" id="5_8nbq8"]
+[ext_resource type="Texture2D" uid="uid://bwi22jnlxle0w" path="res://cursor.png" id="5_le3ju"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5bwg"]
+transparency = 1
+albedo_color = Color(0, 1, 0.0705882, 0.462745)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ncd3f"]
+material = SubResource("StandardMaterial3D_h5bwg")
+size = Vector3(0.52, 0.52, 0.52)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvskm"]
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6640v"]
+material = SubResource("StandardMaterial3D_uvskm")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_au2ed"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="Environment" id="Environment_35ffh"]
+background_mode = 1
+background_color = Color(0.239216, 0.219608, 0.227451, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.196078, 0.27451, 0.254902, 1)
+ambient_light_energy = 0.53
+reflected_light_source = 2
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+layers = 2
+mesh = SubResource("BoxMesh_ncd3f")
+skeleton = NodePath("../RigidBody3D/Camera3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+rotation_edit_mode = 2
+axis_lock_angular_x = true
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.854
+script = ExtResource("2_hpgn8")
+
+[node name="Camera3D" type="Camera3D" parent="RigidBody3D"]
+transform = Transform3D(-0.0484142, 0, -0.998827, 0, 1, 0, 0.998827, 0, -0.0484142, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="RigidBody3D/Camera3D"]
+transform = Transform3D(1, -8.04663e-05, -0.000154876, -0.000154877, -2.47749e-07, -1, 8.04663e-05, 1, -2.4775e-07, 0, 0, -0.4)
+target_position = Vector3(0, -3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = ExtResource("2_3l1bs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+layers = 0
+mesh = ExtResource("3_s44ev")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.432511, 0.471998, -0.768214, 0, 0.852029, 0.523495, 0.901629, -0.226417, 0.368512, -3.54624, 6.14638, 5.85108)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -683.0
+offset_top = -360.0
+offset_right = 685.0
+offset_bottom = 368.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48538
+anchor_top = 0.472527
+anchor_right = 0.51462
+anchor_bottom = 0.527473
+offset_bottom = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_le3ju")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_left = 0.939327
+anchor_top = 0.0480769
+anchor_right = 0.988304
+anchor_bottom = 0.0879121
+text = "255"
+placeholder_text = "Red"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit2" type="TextEdit" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_left = 0.939327
+anchor_top = 0.0989011
+anchor_right = 0.988304
+anchor_bottom = 0.138736
+text = "255"
+placeholder_text = "Green"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextEdit3" type="TextEdit" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_left = 0.939327
+anchor_top = 0.146978
+anchor_right = 0.988304
+anchor_bottom = 0.186813
+text = "255"
+placeholder_text = "Blue
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_left = 0.719298
+anchor_top = 0.010989
+anchor_right = 0.988304
+anchor_bottom = 0.0425824
+text = "Нажмите Tab, чтобы расфокусировать мышь"
+metadata/_edit_use_anchors_ = true
+
+[node name="SensW" type="TouchScreenButton" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(200, 400)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("5_8nbq8")
+passby_press = true
+action = "forw"
+visibility_mode = 1
+
+[node name="SensA" type="TouchScreenButton" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(112, 488)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("5_8nbq8")
+passby_press = true
+action = "left"
+visibility_mode = 1
+
+[node name="SensD" type="TouchScreenButton" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(288, 488)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("5_8nbq8")
+passby_press = true
+action = "right"
+visibility_mode = 1
+
+[node name="SensS" type="TouchScreenButton" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(200, 576)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("5_8nbq8")
+passby_press = true
+action = "back"
+visibility_mode = 1
+
+[node name="SensShift" type="TouchScreenButton" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(1200, 552)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("5_8nbq8")
+passby_press = true
+action = "fdown"
+visibility_mode = 1
+
+[node name="SensSpace" type="TouchScreenButton" parent="CanvasLayer/Control"]
+texture_filter = 1
+position = Vector2(1200, 416)
+scale = Vector2(5, 5)
+texture_normal = ExtResource("5_8nbq8")
+passby_press = true
+action = "fup"
+visibility_mode = 1
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+sleeping = true
+lock_rotation = true
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("BoxMesh_6640v")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("BoxShape3D_au2ed")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+sleeping = true
+lock_rotation = true
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
+mesh = SubResource("BoxMesh_6640v")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("BoxShape3D_au2ed")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_35ffh")
